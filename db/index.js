@@ -13,7 +13,7 @@ class DB {
       // id, first_name, last_name FROM employee TABLE AND department name from department TABLE AND SELECT salary FROM role TABLE
       // YOUR NEED TO USE LEFT JOINS TO JOIN THREE TABLES
       // TODO: YOUR CODE HERE
-
+      "SELECT employee.id, employee.first_name, SUM(role.salary) AS utilized_budget FROM employee LEFT JOIN role ON role.department_id = department.id LEFT JOIN employee ON employee.role_id = role.id GROUP BY department.id, department.name"
     );
   }
 
@@ -35,7 +35,8 @@ class DB {
   updateEmployeeRole(employeeId, roleId) {
     return this.connection.query(
       // TODO: YOUR CODE HERE
-
+      "UPDATE employee SET employee_id = ? WHERE id = ?",
+      [employeeId, roleId]
     );
   }
 
@@ -54,7 +55,7 @@ class DB {
       // id, title, salary FROM role TABLE AND department name FROM department TABLE
       // YOU NEED TO USE LEFT JOIN TO JOIN role and department TABLES
       // TODO: YOUR CODE HERE
-
+      "SELECT role.id, role.title, SUM(role.salary) AS utilized_budget FROM role LEFT JOIN employee ON employee.role_id = role.id LEFT JOIN department ON employee.role_id = role.id GROUP BY role.id, role.title"
     );
   }
 
@@ -62,7 +63,7 @@ class DB {
   createRole(role) {
     return this.connection.query(
       // TODO: YOUR CODE HERE
-
+      "INSERT INTO employee SET ?", role
       );
   }
 
@@ -78,6 +79,7 @@ class DB {
   createDepartment(department) {
     return this.connection.query(
       // TODO: YOUR CODE HERE
+      "INSERT INTO employee SET ?", department
     );
   }
 
